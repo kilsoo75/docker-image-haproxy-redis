@@ -4,11 +4,12 @@ set -e
 # first arg is `-f` or `--some-option`
 if [ "${1#-}" != "$1" ]; then
     set -- haproxy "$@"
-    echo "$@"
-    echo "11111111111111"
 fi
 
-echo "$@"
-echo "22222222222222"
+if [ "$1" = 'haproxy' ]; then
+    # if the user wants "haproxy", let's use "haproxy-systemd-wrapper" instead so we can have proper reloadability implemented by upstream
+    shift # "haproxy"
+    set -- haproxy-systemd-wrapper -p /run/haproxy.pid "$@"
+fi
 
 exec "$@"
