@@ -1,6 +1,15 @@
 #!/bin/sh
 set -e
 
+# replace master password
+if [ "x$MASTER_PASSWORD" != "x" ]
+then
+    sed -i 's/masterpassword/'"$MASTER_PASSWORD"'/g' /etc/haproxy/haproxy.cfg
+else
+    sed -i 's/masterpassword/'"$MASTER_DEFAULT_PASSWORD"'/g' /etc/haproxy/haproxy.cfg
+fi
+
+
 # first arg is `-f` or `--some-option`
 if [ "${1#-}" != "$1" ]; then
     set -- haproxy "$@"
