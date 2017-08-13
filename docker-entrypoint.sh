@@ -2,14 +2,14 @@
 set -e
 
 # first arg is `-f` or `--some-option`
-# or first arg is `something.conf`
-if [ "${1#-}" != "$1" ] || [ "${1%.conf}" != "$1" ]; then
-	set -- haproxy "$@"
+if [ "${1#-}" != "$1" ]; then
+    set -- haproxy "$@"
 fi
 
-# allow the container to be started with `--user`
-if [ "$1" = 'haproxy']; then
-	exec haproxy "$0" "$@"
+if [ "$1" = 'haproxy' ]; then
+    # if the user wants "haproxy", let's use "haproxy-systemd-wrapper" instead so we can have proper reloadability implemented by upstream
+    shift # "haproxy"
+    set -- "$(which haproxy-systemd-wrapper)" -p /run/haproxy.pid "$@"
 fi
 
 exec "$@"
