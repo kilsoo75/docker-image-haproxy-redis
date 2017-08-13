@@ -12,8 +12,9 @@ RUN yum clean all && \
     yum -y install haproxy && \
     mv /etc/haproxy/haproxy.cfg /etc/haproxy/haproxy.cfg.org
 
-COPY haproxy.cfg /etc/haproxy/haproxy.cfg && \
-     docker-entrypoint.sh /usr/local/bin/
+COPY haproxy.cfg /etc/haproxy/haproxy.cfg
+
+COPY docker-entrypoint.sh /usr/local/bin/
 
 ENTRYPOINT ["docker-entrypoint.sh"]
 
