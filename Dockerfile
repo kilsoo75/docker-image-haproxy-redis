@@ -1,6 +1,3 @@
-#FROM haproxy:1.7
-#COPY haproxy.cfg /usr/local/etc/haproxy/haproxy.cfg
-
 FROM centos:7
 
 MAINTAINER Kilsoo Kang <kilsoo75@gmail.com>
@@ -19,6 +16,3 @@ COPY docker-entrypoint.sh /usr/local/bin/
 ENTRYPOINT ["docker-entrypoint.sh"]
 
 CMD [ "haproxy", "-f", "/etc/haproxy/haproxy.cfg" ]
-
-    
-
