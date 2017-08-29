@@ -3,6 +3,8 @@ FROM centos:7
 MAINTAINER Kilsoo Kang <kilsoo75@gmail.com>
 
 ENV MASTER_DEFAULT_PASSWORD redis1234
+ENV SLAVE_DEFAULT_NAME redis-master
+ENV SLAVE_DEFAULT_NAME redis-slave
 
 RUN yum clean all && \
     yum -y install epel-release && \
