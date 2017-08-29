@@ -18,7 +18,7 @@ else
 fi
 
 # dns for slave
-if [ "x"$SLAVE_NAME" != "x" ]
+if [ "x$SLAVE_NAME" != "x" ]
 then
     sed -i 's/slavename/'"$SLAVE_NAME"'/g' /etc/haproxy/haproxy.cfg
 else
